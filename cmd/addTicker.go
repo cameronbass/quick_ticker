@@ -17,7 +17,9 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
+	finnhub "github.com/Finnhub-Stock-API/finnhub-go/v2"
 	"github.com/spf13/cobra"
 )
 
@@ -51,5 +53,19 @@ func init() {
 }
 
 func newTicker(s []string) {
-	fmt.Println("New ticker", s, "Has been added")
+	cfg := finnhub.NewConfiguration()
+	cfg.AddDefaultHeader("X-Finnhub-Token", "c4sa9cqad3ieaa56romg")
+	// finnhubClient := finnhub.NewAPIClient(cfg).DefaultApi
+
+	// res, _, _ := finnhubClient.SymbolSearch(context.Background()).Q("LCID").Execute()
+
+	// for _, s := range *res.Result {
+	// 	fmt.Println(string(*s.DisplaySymbol))
+	// }
+
+	f, _ := os.Create("tmp/test.txt")
+
+	n3, _ := f.WriteString("Test\n")
+	fmt.Printf("wrote %d bytes\n", n3)
+
 }
